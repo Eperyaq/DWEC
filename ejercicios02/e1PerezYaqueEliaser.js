@@ -361,4 +361,109 @@ function ejercicio16(){
 
 }
 
-ejercicio16()
+
+function ejercicio17(){
+    class Producto {
+        constructor(nombre, categoria, precio, stock = 0){
+            this.nombre = nombre;
+            this.categoria = categoria;
+            this.precio = precio;
+            this.stock = stock;
+        }
+
+        actualizarStock(cantidad){
+        
+            if(isNaN(cantidad)){
+                alert("Tipo de dato incorrecto.")
+            }else{
+                if(cantidad >0){
+                    this.stock += cantidad;
+                } else {
+                    this.stock -= cantidad;
+        
+                    if(this.cantidad < 0 ){
+                        cantidad = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    class Inventario {
+        
+        constructor(){
+            this.arrayProductos = [];
+        }
+
+        agregarProducto(producto){
+            this.arrayProductos.push(producto);
+        }
+
+        eliminarProducto(nombreProducto){
+            this.arrayProductos = this.arrayProductos.filter(producto => producto.nombre !== nombreProducto);
+        }
+
+        buscarProducto(nombreProducto){
+            let productoSacado = this.arrayProductos.find(producto => producto.nombre == nombreProducto);
+            console.log(`${productoSacado.nombre} cuesta ${productoSacado.precio} euros, su categoria es ${productoSacado.categoria}  y ahora mismmo hay ${productoSacado.stock} en stock.`)
+            
+            
+        }
+    }
+    
+
+    let prod1 = new Producto("papas","Comida",2,3);
+    let prod2 = new Producto("salchicha","Comida",3,2);
+    
+
+
+    let invent = new Inventario();
+    invent.agregarProducto(prod1);
+    invent.agregarProducto(prod2);
+    console.log(invent.arrayProductos);
+
+
+    //invent.eliminarProducto("papas");
+    console.log(invent.buscarProducto("salchicha"))
+
+}
+
+
+function ejercicio18(){
+
+    function calcularPrecioFinal(precioBase, descuentos) {
+        if (typeof precioBase !== 'number' || precioBase <= 0) {
+            console.log("El precio base debe ser un número positivo.");
+        }
+
+        descuentos.forEach(descuento => {
+            if (typeof descuento !== 'number' || descuento < 0 || descuento > 100) {
+                console.log("Cada descuento debe estar en el rango de 0 a 100.");
+            }
+        });
+    
+        let precioFinal = precioBase;
+        descuentos.forEach(descuento => {
+            precioFinal -= precioFinal * (descuento / 100);
+        });
+    
+        return precioFinal;
+    }
+
+
+    function mostrarPrecioFinal(precioBase, descuentos) {
+        try {
+            let precioFinal = calcularPrecioFinal(precioBase, descuentos);
+            console.log(`El precio final después de aplicar los descuentos es: ${precioFinal.toFixed(2)}`);
+        } catch (error) {
+            console.error(error.message);
+        }
+    }
+
+
+    let precioBase = 100;
+    let descuentos = [10, 20]; // 10% y luego 20%
+
+    mostrarPrecioFinal(precioBase, descuentos);
+}
+ejercicio18()
