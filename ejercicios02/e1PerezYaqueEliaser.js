@@ -177,8 +177,6 @@ function ejercicio10(){
 
 function ejercicio11(){
 
-    
-
     let resultados = {
         1: 0,
         2: 0,
